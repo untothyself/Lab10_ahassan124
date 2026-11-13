@@ -1,7 +1,7 @@
 /**
  * @file Lab10_ahassan124.cpp
  * @author Abass Hassan
- * @date 2026-10-13
+ * @date 2026-11-10
  * @brief Runs a savings account program that can save account details to a file.
  */
 
@@ -28,7 +28,7 @@ public:
      * @param id The customer's ID.
      * @param emailAddr The customer's email address.
      */
-    Customer(const string& id, const string& emailAddr)
+    Customer(const string &id, const string &emailAddr)
         : customerID(id), email(emailAddr) {}
 
     /** @brief Gets the customer ID. @return The customer ID. */
@@ -63,7 +63,7 @@ protected:
      * @return Nothing.
      */
     void printSummary(double previousBalance, double totalDeposits,
-        double totalWithdrawals, double newBalance) const
+                      double totalWithdrawals, double newBalance) const
     {
         cout << "Account Number: " << accountNumber << endl;
         cout << "Previous Balance: $" << previousBalance << endl;
@@ -82,7 +82,7 @@ public:
      * @param initialBalance The starting balance.
      * @param customer The account's owner.
      */
-    Account(const string& accNum, double initialBalance, const Customer& customer)
+    Account(const string &accNum, double initialBalance, const Customer &customer)
         : accountNumber(accNum), balance(initialBalance), owner(customer) {}
 
     /** @brief Allows safe cleanup through an Account pointer. */
@@ -95,7 +95,8 @@ public:
      */
     bool deposit(double amount)
     {
-        if (amount <= 0) return false;
+        if (amount <= 0)
+            return false;
         deposits.push_back(amount);
         return true;
     }
@@ -107,7 +108,8 @@ public:
      */
     bool withdraw(double amount)
     {
-        if (amount <= 0) return false;
+        if (amount <= 0)
+            return false;
         withdrawals.push_back(amount);
         return true;
     }
@@ -145,9 +147,12 @@ public:
     void printTransactions() const
     {
         cout << "Deposits: ";
-        for (double amount : deposits) cout << "$" << amount << " ";
-        cout << endl << "Withdrawals: ";
-        for (double amount : withdrawals) cout << "$" << amount << " ";
+        for (double amount : deposits)
+            cout << "$" << amount << " ";
+        cout << endl
+             << "Withdrawals: ";
+        for (double amount : withdrawals)
+            cout << "$" << amount << " ";
         cout << endl;
     }
 };
@@ -165,8 +170,8 @@ public:
      * @param interestRate The daily interest rate as a decimal.
      * @param customer The account's owner.
      */
-    SavingsAccount(const string& accNum, double initialBalance,
-        float interestRate, const Customer& customer)
+    SavingsAccount(const string &accNum, double initialBalance,
+                   float interestRate, const Customer &customer)
         : Account(accNum, initialBalance, customer), interest(interestRate) {}
 
     /** @brief Processes transactions and adds interest if the balance is positive. @return Nothing. */
@@ -261,7 +266,7 @@ int getMenuOption()
  * @param prompt The message shown to the user.
  * @return The amount entered by the user.
  */
-double getAmount(const char* prompt)
+double getAmount(const char *prompt)
 {
     double amount = 0;
     do
@@ -287,9 +292,9 @@ int main()
     Customer customer("0123456789", "customer@cscc.edu");
 
     // Keep a base pointer so we can demonstrate polymorphism.
-    SavingsAccount* savingsAccount = new SavingsAccount(
+    SavingsAccount *savingsAccount = new SavingsAccount(
         "5423678409", 100.00, 0.02f, customer);
-    Account* account = savingsAccount;
+    Account *account = savingsAccount;
     account->printAccountInfo();
 
     int choice = getMenuOption();
